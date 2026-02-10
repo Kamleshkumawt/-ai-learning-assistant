@@ -7,6 +7,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import errorHandler from "./middleware/errorHandler.js";
 import authRoutes from "./routes/auth.routes.js";
+import documentRoutes from "./routes/document.routes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -49,6 +50,7 @@ if (process.env.NODE_ENV === "development") {
 
 // routes 
 app.use("/api/auth", authRoutes);
+app.use("/api/document", documentRoutes);
 
 // Health check endpoint
 app.get("/health", (req, res) => {
