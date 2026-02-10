@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { body } from "express-validator";
+import { changePassword, getProfile, login, register, updateProfile } from "../controllers/auth.controller.js";
+import protect from '../middleware/auth.js';
 
 const router = Router();
 
@@ -34,6 +36,6 @@ router.post("/login", loginValidation, login);
 //Protected routes
 router.get("/profile", protect, getProfile);
 router.put("/profile", protect, updateProfile);
-router.put("/change-password", protect, changePassword);
+router.post("/change-password", protect, changePassword);
 
 export default router;
