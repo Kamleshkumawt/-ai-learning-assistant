@@ -6,10 +6,7 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import errorHandler from "./middleware/errorHandler.js";
-import authRoutes from "./routes/auth.routes.js";
-import documentRoutes from "./routes/document.routes.js";
-import flashcardRoutes from "./routes/flashcard.routes.js";
-import aiRoutes from "./routes/ai.routes.js";
+import routes from "./routes/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -51,10 +48,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // routes 
-app.use("/api/auth", authRoutes);
-app.use("/api/document", documentRoutes);
-app.use("/api/flashcard", flashcardRoutes);
-app.use("/api/aiRoutes", aiRoutes);
+app.use("/api",routes)
 
 // Health check endpoint
 app.get("/health", (req, res) => {

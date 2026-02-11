@@ -1,0 +1,23 @@
+import {Router} from 'express';
+import {
+    getQuizzes,
+    getQuizById,
+    submitQuiz,
+    getQuizResults,
+    deleteQuiz
+} from '../controllers/quiz.controller.js';
+import protect from '../middleware/auth.js';
+
+const router = Router();
+
+//All routes are protected
+
+router.use(protect);
+
+router.get('/:documentId', getQuizzes);
+router.get('/quiz/:id', getQuizById);
+router.post('/:id/submit', submitQuiz);
+router.get('/:id/results', getQuizResults);
+router.delete('/:id', deleteQuiz);
+
+export default router;
