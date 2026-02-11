@@ -5,7 +5,7 @@ import {
     reviewFlashcard,
     toggleStarFlashcard,
     deleteFlashcard
-} from '../controllers/flashcard.controller';
+} from '../controllers/flashcard.controller.js';
 import protect from '../middleware/auth.js';
 
 const router = Router();
