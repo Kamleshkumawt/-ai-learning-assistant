@@ -4,6 +4,7 @@ import documentRoutes from './document.routes.js';
 import flashcardRoutes from './flashcard.routes.js';
 import aiRoutes from './ai.routes.js';
 import quizRoutes from './quiz.routes.js';
+import progressRoutes from './progress.routes.js';
 
 const router = Router();
 
@@ -12,5 +13,6 @@ router.use('/document', documentRoutes);
 router.use('/flashcard', flashcardRoutes);
 router.use('/ai', aiRoutes);
 router.use('/quizzes', quizRoutes);
+router.use('/progress', progressRoutes);
 
 export default router;
