@@ -22,7 +22,14 @@ app.use(
     }),
 );
 
-app.use(helmet());
+app.use(helmet({
+  crossOriginEmbedderPolicy: false,
+  contentSecurityPolicy: {
+    directives: {
+      frameAncestors: ["'self'", "http://localhost:3000", "http://localhost:5173"],
+    },
+  },
+}));
 
 app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: true, limit: "20mb" }));

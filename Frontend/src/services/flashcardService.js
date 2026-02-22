@@ -12,14 +12,14 @@ const getAllFlashcardSets = async () => {
 
 const getFlashcardsForDocument = async (documentId) => {
     try {
-        const res = await axiosInstance.get(API_PATHS.FLASHCARDS. GET_FLASHCARD_FOR_DOC(documentId));
+        const res = await axiosInstance.get(API_PATHS.FLASHCARDS.GET_FLASHCARD_FOR_DOC(documentId));
         return res.data;
     } catch(error){
         throw error.response?.data || { Message: "Failed to fetch flashcards." };
     }
 };
 
-const reviewFlashcard = async (cardId,cardIndex) => {
+const reviewFlashcard = async (cardId, cardIndex) => {
     try {
         const res = await axiosInstance.post(API_PATHS.FLASHCARDS.REVIEW_FLASHCARD(cardId),{cardIndex});
         return res.data;

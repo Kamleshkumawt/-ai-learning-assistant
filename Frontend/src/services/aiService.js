@@ -30,7 +30,7 @@ const generateSummary = async (documentId) => {
     const res = await axiosInstance.post(API_PATHS.AI.GENERATE_SUMMARY, {
       documentId,
     });
-    return res.data;
+    return res.data.data;
   } catch (error) {
     throw error.response?.data || { Message: "Failed to generate summary." };
   }
@@ -53,7 +53,7 @@ const explainConcept = async (documentId, concept) => {
       documentId,
       concept,
     });
-    return res.data;
+    return res.data.data;
   } catch (error) {
     throw error.response?.data || { Message: "Failed to explain concept." };
   }

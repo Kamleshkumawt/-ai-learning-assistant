@@ -75,7 +75,7 @@ const quizSchema = new mongoose.Schema({
 });
 
 // Index for faster queries
-quizSchema.index({ userId: 1, documentId: 1 }, { unique: true });
+quizSchema.index({ userId: 1, documentId: 1 });
 
 const Quiz = mongoose.model("quiz", quizSchema);
 export default Quiz;

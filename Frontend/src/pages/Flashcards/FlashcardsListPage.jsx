@@ -1,8 +1,60 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import flashcardService from '../../services/flashcardService'
+import PageHeader from '../../components/common/PageHeader'
+import Spinner from '../../components/common/Spinner'
+import toast from 'react-hot-toast'
+import EmptyState from '../../components/common/EmptyState'
+import FlashcardSetCard from '../../components/flashcards/FlashcardSetCard'
+
 
 const FlashcardsListPage = () => {
+  const [flashcardSets, setFlashcardSets] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(()=> {
+    const fetchFlashcardSets = async () => {
+      try {
+        const res = await flashcardService.getAllFlashcardSets();
+        // console.log("fetchFlashcardSets____________", res.data);
+        setFlashcardSets(res.data);
+      } catch (error) {
+        toast.error("Failed to fetch flashcard sets.");
+        console.error("Error fetching flashcard sets:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchFlashcardSets();
+  },[]);
+
+  const renderContent = () => {
+    if(loading) {
+      return <Spinner />;
+    }
+
+    if(flashcardSets.length === 0) {
+      return (
+        <EmptyState
+          title="No flashcard Sets Found"
+          description="You haven't generated any flashcards yet. Go to a document to create a flashcard set."
+        />
+      );
+    }
+
+    return (
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+        {flashcardSets.map((set) => (
+          <FlashcardSetCard key={set._id} flashcardSet={set} />
+        ))}
+      </div>
+    );
+  };
+
   return (
-    <div>FlashcardsListPage</div>
+    <div>
+      <PageHeader title="All Flashcard Sets" />
+      {renderContent()}
+    </div>
   )
 }
 

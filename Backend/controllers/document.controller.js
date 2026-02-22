@@ -3,7 +3,8 @@ import flashcardModel from "../models/flashcard.model.js";
 import quizModel from "../models/quiz.model.js";
 import { extractTextFromPDF } from "../utils/pdfParser.js";
 import { chunkText } from "../utils/textChunker.js";
-import fs from "fs";
+import { promises as fs } from "fs";
+import path from "path";
 import mongoose from "mongoose";
 
 //@desc Upload PDF document
@@ -178,7 +179,7 @@ export const getDocument = async (req, res, next) => {
       userId: req.user.id,
     });
 
-    //Update last accessed 
+    //Update last accessed
     document.lastAccessed = new Date();
     await document.save();
 
@@ -191,7 +192,6 @@ export const getDocument = async (req, res, next) => {
       success: true,
       data: documentData,
     });
-
   } catch (error) {
     next(error);
   }
@@ -215,9 +215,15 @@ export const deleteDocument = async (req, res, next) => {
         statusCode: 404,
       });
     }
-    
+
+    const fileUrl = document.filePath;
+
+    const relativePath = fileUrl.replace("http://localhost:3000", "");
+
+    // Use path.join with the project root, not __dirname
+    const filePath = path.join(process.cwd(), relativePath);
     //Delete file from filesystem
-    await fs.unlink(document.filePath).catch(() => {});
+    await fs.unlink(filePath);
 
     //Delete document from database
     await document.deleteOne();
