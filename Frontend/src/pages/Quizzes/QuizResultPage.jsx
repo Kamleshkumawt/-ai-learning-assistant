@@ -9,7 +9,6 @@ import {
   CheckCircle2,
   XCircle,
   Trophy,
-  Target,
   BookOpen,
 } from "lucide-react";
 

@@ -23,7 +23,7 @@ const ChatInterface = () => {
     const fetchChatHistory = async () => {
       try {
         const data = await aiService.getChatHistory(documentId);
-        console.log("Data____getChatHistory", data);
+        // console.log("Data____getChatHistory", data);
         setHistory(data.data);
       } catch (error) {
         console.error("Error fetching chat history:", error);
@@ -53,7 +53,7 @@ const ChatInterface = () => {
     setLoading(true);
     try {
       const res = await aiService.chat(documentId, useMessage.content);
-      console.log("Data____chat", res);
+      // console.log("Data____chat", res);
       const assistantMessage = {
         role: "assistant",
         content: res.data.answer,
